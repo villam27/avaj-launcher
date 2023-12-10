@@ -1,3 +1,3 @@
 find * -name "*.java" > sources.txt
 javac @sources.txt
-java -cp src com.avaj.simulator.Simulator
+java -cp src com.avaj.simulator.Simulator $1
