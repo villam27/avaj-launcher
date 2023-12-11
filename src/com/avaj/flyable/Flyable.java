@@ -1,6 +1,6 @@
 package com.avaj.flyable;
 
-abstract class Flyable {
+public abstract class Flyable {
 	//	Protected	WeatherTower
 	
 	public abstract void updateConditions();
