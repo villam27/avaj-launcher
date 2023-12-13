@@ -4,8 +4,15 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.lang.model.type.NullType;
+
+import com.avaj.coordinates.Coordinates;
 import com.avaj.exceptions.NotAPositiveInteger;
+import com.avaj.exceptions.ParsingException;
 import com.avaj.exceptions.TypeNotFoundException;
+import com.avaj.flyable.Aircraft;
+import com.avaj.flyable.AircraftFactory;
+import com.avaj.flyable.Baloon;
 import com.avaj.flyable.Flyable;
 
 class Data {
@@ -29,6 +36,7 @@ class Data {
 	}
 }
 
+//	Todo: Put throws in each class and not directly handle errors in the Parser class
 public class Parser {
 	private File file;
 	private Scanner reader;
@@ -43,12 +51,12 @@ public class Parser {
 	}
 
 	public Data parseFile() {
-		boolean first_line = true;
+		int lineCount = 1;
 		Data data;
 
 		while (reader.hasNextLine()) {
 			String line = reader.nextLine();
-			if (first_line) {
+			if (lineCount == 1) {
 				try {
 					int value = readNbrOfRestart(line);
 					data = new Data(value);
@@ -56,8 +64,15 @@ public class Parser {
 					System.err.println(e);
 					System.exit(1);
 				}
-				first_line = false;
+			} else {
+				try {
+					readAircraftData(line, lineCount);
+				} catch(ParsingException e) {
+					System.err.println(e);
+					System.exit(1);
+				}
 			}
+			lineCount++;
 		}
 		return new Data(5);
 	}
@@ -71,9 +86,34 @@ public class Parser {
 			System.err.println(e + " in " + file.getName() + ":" + 1);
 			System.exit(1);
 		}
+		//	Move it
 		if (value <= 0)
 			throw new NotAPositiveInteger(p_line, 1, file.getName());
 		return value;
+	}
+
+	private Aircraft readAircraftData(String p_line, int p_lineCount)
+	throws ParsingException {
+		String[] token = p_line.split(" ");
+		Aircraft aircraft = null;
+
+		if (token.length != 5) {
+			throw new ParsingException(p_line, p_lineCount, file.getName());
+		}
+		try {
+			aircraft = (Aircraft)AircraftFactory.newAircraft(token[0], token[1],
+															new Coordinates(
+																Integer.parseInt(token[2]),
+																Integer.parseInt(token[3]),
+																Integer.parseInt(token[4])));
+		} catch(TypeNotFoundException e) {
+			System.err.println(e + " in " + file.getName() + ":" + p_lineCount);
+			System.exit(1);
+		} catch(NumberFormatException e) {
+			System.err.println(e + " in " + file.getName() + ":" + p_lineCount);
+			System.exit(1);
+		}
+		return aircraft;
 	}
 
 	public void dumpFile() {

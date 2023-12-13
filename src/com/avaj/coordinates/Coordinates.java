@@ -5,7 +5,7 @@ public class Coordinates {
 	private int latitute;
 	private int height;
 
-	void Coordinate(int p_longiture, int p_latitute, int p_height) {
+	public Coordinates(int p_longiture, int p_latitute, int p_height) {
 		longitude = p_longiture;
 		latitute = p_latitute;
 		height = p_height;
