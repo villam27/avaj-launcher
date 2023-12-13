@@ -1,10 +1,7 @@
 package com.avaj.simulator;
 
 import java.io.File;
-import java.util.List;
 import java.util.Scanner;
-
-import javax.lang.model.type.NullType;
 
 import com.avaj.coordinates.Coordinates;
 import com.avaj.exceptions.NotAPositiveInteger;
@@ -12,29 +9,6 @@ import com.avaj.exceptions.ParsingException;
 import com.avaj.exceptions.TypeNotFoundException;
 import com.avaj.flyable.Aircraft;
 import com.avaj.flyable.AircraftFactory;
-import com.avaj.flyable.Baloon;
-import com.avaj.flyable.Flyable;
-
-class Data {
-	private int loop_nbr;
-	private List<Flyable> flyables;
-
-	public Data(int p_loop_nbr) {
-		loop_nbr = p_loop_nbr;
-	}
-
-	public int getLoopNbr() {
-		return loop_nbr;
-	}
-
-	public List<Flyable> getFlyables() {
-		return flyables;
-	}
-
-	public void addFlyable(Flyable p_flyable) {
-		flyables.add(p_flyable);
-	}
-}
 
 //	Todo: Put throws in each class and not directly handle errors in the Parser class
 public class Parser {
@@ -52,21 +26,21 @@ public class Parser {
 
 	public Data parseFile() {
 		int lineCount = 1;
-		Data data;
+		Data data = new Data();
 
 		while (reader.hasNextLine()) {
 			String line = reader.nextLine();
 			if (lineCount == 1) {
 				try {
 					int value = readNbrOfRestart(line);
-					data = new Data(value);
+					data.setNbrOfRestart(value);
 				} catch (Exception e) {
 					System.err.println(e);
 					System.exit(1);
 				}
 			} else {
 				try {
-					readAircraftData(line, lineCount);
+					data.addFlyable(readAircraftData(line, lineCount));
 				} catch(ParsingException e) {
 					System.err.println(e);
 					System.exit(1);
@@ -74,7 +48,7 @@ public class Parser {
 			}
 			lineCount++;
 		}
-		return new Data(5);
+		return data;
 	}
 
 	private int readNbrOfRestart(String p_line)
