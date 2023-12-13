@@ -1,13 +1,11 @@
 package com.avaj.simulator;
 
+import com.avaj.Tower.WeatherTower;
 import com.avaj.flyable.Flyable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 class Data {
 	private int nbrOfRestart = 1;
-	private List<Flyable> flyables = new ArrayList<Flyable>();
+	private WeatherTower tower = new WeatherTower();
 
 	public Data() {}
 
@@ -19,11 +17,15 @@ class Data {
 		nbrOfRestart = p_restart;
 	}
 
-	public List<Flyable> getFlyables() {
-		return flyables;
+	public WeatherTower getTower() {
+		return tower;
 	}
 
 	public void addFlyable(Flyable p_flyable) {
-		flyables.add(p_flyable);
+		tower.register(p_flyable);
+	}
+
+	public void remFlyable(Flyable p_flyable) {
+		tower.unregister(p_flyable);
 	}
 }
