@@ -4,8 +4,10 @@ import com.avaj.coordinates.Coordinates;
 
 public class WeatherTower extends Tower {
 	public String getWeather(Coordinates p_coordinates) {
-		return "";
+		return WeatherProvider.getCurrentWeather(p_coordinates);
 	}
 
-	public void changeWeather() {}
+	public void changeWeather() {
+		conditionChanged();
+	}
 }
