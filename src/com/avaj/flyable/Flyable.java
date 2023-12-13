@@ -1,10 +1,12 @@
 package com.avaj.flyable;
 
+import com.avaj.Tower.WeatherTower;
+
 public abstract class Flyable {
-	//	Protected	WeatherTower
+	protected WeatherTower weatherTower;
 	
 	public abstract void updateConditions();
-	public void registerTower() {
+	public void registerTower(WeatherTower p_Tower) {
 		//	Add WeatherTower in param
 	}
 }
