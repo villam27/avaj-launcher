@@ -15,4 +15,11 @@ public class Aircraft extends Flyable {
 	}
 
 	public void updateConditions() {}
+
+	public long getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
 }

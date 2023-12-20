@@ -8,10 +8,12 @@ public class Tower {
 	private List<Flyable> observers = new ArrayList<>();
 
 	public void register(Flyable p_flyable) {
+		registerMessage(p_flyable);
 		observers.add(p_flyable);
 	}
 
 	public void unregister(Flyable p_flyable) {
+		unregisterMessage(p_flyable);
 		observers.remove(p_flyable);
 	}
 
@@ -20,4 +22,7 @@ public class Tower {
 			flyable.updateConditions();
 		}
 	}
+
+	protected void registerMessage(Flyable p_flyable) {}
+	protected void unregisterMessage(Flyable p_flyable) {}
 }

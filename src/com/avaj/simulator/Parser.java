@@ -89,11 +89,4 @@ public class Parser {
 		}
 		return aircraft;
 	}
-
-	public void dumpFile() {
-		while (reader.hasNextLine()) {
-			String line = reader.nextLine();
-			System.out.println(line);
-		}
-	}
 }
