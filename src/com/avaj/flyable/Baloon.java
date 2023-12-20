@@ -22,15 +22,15 @@ public class Baloon extends Aircraft {
 				break;
 			case "RAIN":
 				height -= 5;
-				message = "I'm all wet";
+				message = "I'm all wet.";
 				break;
 			case "FOG":
 				height -= 3;
-				message = "Where are we ?";
+				message = "Where are we?";
 				break;
 			case "SNOW":
 				height -= 15;
-				message = "Oh no ! we gonna crash !";
+				message = "Oh no! we gonna crash!";
 				break;
 			default:
 				break;

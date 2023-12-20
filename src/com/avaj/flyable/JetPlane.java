@@ -30,7 +30,7 @@ public class JetPlane extends Aircraft {
 				break;
 			case "SNOW":
 				height -= 7;
-				message = "Freeeezing !!!";
+				message = "Freeeezing!!!";
 				break;
 			default:
 				break;
