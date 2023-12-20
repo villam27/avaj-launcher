@@ -5,8 +5,8 @@ public class Coordinates {
 	private int latitute;
 	private int height;
 
-	public Coordinates(int p_longiture, int p_latitute, int p_height) {
-		longitude = p_longiture;
+	public Coordinates(int p_longitude, int p_latitute, int p_height) {
+		longitude = p_longitude;
 		latitute = p_latitute;
 		height = p_height;
 	}
