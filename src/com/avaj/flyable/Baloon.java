@@ -37,9 +37,12 @@ public class Baloon extends Aircraft {
 		}
 		if (height > 100)
 			height = 100;
-		if (height < 0)
-			height = 0;
 		System.out.println("Baloon#" + name + "(" + id + "): " + message);
 		coordinates = new Coordinates(lon, lat, height);
+		if (height <= 0) {
+			System.out.println("Baloon#" + name + "(" + id + "): landing.");
+			weatherTower.unregister(this);
+			unregisterTower();
+		}
 	}
 }

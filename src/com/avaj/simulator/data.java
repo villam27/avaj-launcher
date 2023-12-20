@@ -25,9 +25,4 @@ class Data {
 		p_flyable.registerTower(tower);
 		tower.register(p_flyable);
 	}
-
-	public void remFlyable(Flyable p_flyable) {
-		p_flyable.registerTower(null);
-		tower.unregister(p_flyable);
-	}
 }

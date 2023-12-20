@@ -28,7 +28,7 @@ public class WeatherTower extends Tower {
 			// error here
 		}
 		System.out.println("Tower says: " + type + "#" + aircraft.getName()
-							+ "(" + aircraft.getId() + ") registered from weather tower");	
+							+ "(" + aircraft.getId() + ") registered from weather tower.");	
 	}
 
 	public void unregisterMessage(Flyable p_flyable) {
@@ -47,6 +47,6 @@ public class WeatherTower extends Tower {
 			// error here
 		}
 		System.out.println("Tower says: " + type + "#" + aircraft.getName()
-							+ "(" + aircraft.getId() + ") unregistered from weather tower");
+							+ "(" + aircraft.getId() + ") unregistered from weather tower.");
 	}
 }

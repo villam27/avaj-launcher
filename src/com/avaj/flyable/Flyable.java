@@ -9,4 +9,7 @@ public abstract class Flyable {
 	public void registerTower(WeatherTower p_Tower) {
 		weatherTower = p_Tower;
 	}
+	public void unregisterTower() {
+		weatherTower = null;
+	}
 }
