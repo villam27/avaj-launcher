@@ -1,6 +1,7 @@
 package com.avaj.flyable;
 
 import com.avaj.coordinates.Coordinates;
+import com.avaj.logger.logger;
 
 public class Helicopter extends Aircraft {
 	public Helicopter(long p_id, String p_name, Coordinates p_coordinate) {
@@ -37,10 +38,10 @@ public class Helicopter extends Aircraft {
 		}
 		if (height > 100)
 			height = 100;
-		System.out.println("Helicopter#" + name + "(" + id + "): " + message);
+		logger.write("Helicopter#" + name + "(" + id + "): " + message);
 		coordinates = new Coordinates(lon, lat, height);
 		if (height <= 0) {
-			System.out.println("Helicopter#" + name + "(" + id + "): landing.");
+			logger.write("Helicopter#" + name + "(" + id + "): landing.");
 			weatherTower.unregister(this);
 			unregisterTower();
 		}

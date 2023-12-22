@@ -2,6 +2,7 @@ package com.avaj.Tower;
 
 import com.avaj.coordinates.Coordinates;
 import com.avaj.flyable.*;
+import com.avaj.logger.logger;
 
 public class WeatherTower extends Tower {
 	public String getWeather(Coordinates p_coordinates) {
@@ -27,7 +28,7 @@ public class WeatherTower extends Tower {
 			type = "Error";
 			// error here
 		}
-		System.out.println("Tower says: " + type + "#" + aircraft.getName()
+		logger.write("Tower says: " + type + "#" + aircraft.getName()
 							+ "(" + aircraft.getId() + ") registered from weather tower.");	
 	}
 
@@ -46,7 +47,7 @@ public class WeatherTower extends Tower {
 			type = "Error";
 			// error here
 		}
-		System.out.println("Tower says: " + type + "#" + aircraft.getName()
+		logger.write("Tower says: " + type + "#" + aircraft.getName()
 							+ "(" + aircraft.getId() + ") unregistered from weather tower.");
 	}
 }

@@ -1,5 +1,7 @@
 package com.avaj.simulator;
 
+import com.avaj.logger.logger;
+
 public class Simulator {
 	public static void main(String args[]) {
 		Parser parser;
@@ -13,8 +15,8 @@ public class Simulator {
 
 		parser = new Parser(args[0]);
 		data = parser.parseFile();
+		logger.create("simulation.txt");
 		for (int i = 0; i < data.getNbrOfRestart(); i++) {
-			System.out.println("Try nbr: " + i);
 			data.getTower().changeWeather();
 		}
 	}
