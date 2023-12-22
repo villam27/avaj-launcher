@@ -1,7 +1,7 @@
 package com.avaj.flyable;
 
 import com.avaj.coordinates.Coordinates;
-import com.avaj.logger.logger;
+import com.avaj.logger.Logger;
 
 public class Baloon extends Aircraft {
 	public Baloon(long p_id, String p_name, Coordinates p_coordinate) {
@@ -38,10 +38,10 @@ public class Baloon extends Aircraft {
 		}
 		if (height > 100)
 			height = 100;
-		logger.write("Baloon#" + name + "(" + id + "): " + message);
+		Logger.write("Baloon#" + name + "(" + id + "): " + message);
 		coordinates = new Coordinates(lon, lat, height);
 		if (height <= 0) {
-			logger.write("Baloon#" + name + "(" + id + "): landing.");
+			Logger.write("Baloon#" + name + "(" + id + "): landing.");
 			weatherTower.unregister(this);
 			unregisterTower();
 		}

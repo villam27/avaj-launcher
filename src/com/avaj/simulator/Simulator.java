@@ -1,6 +1,6 @@
 package com.avaj.simulator;
 
-import com.avaj.logger.logger;
+import com.avaj.logger.Logger;
 
 public class Simulator {
 	public static void main(String args[]) {
@@ -12,7 +12,7 @@ public class Simulator {
 			System.exit(1);
 		}
 		System.out.println("Start avaj launcher");
-		logger.create("simulation.txt");
+		Logger.create("simulation.txt");
 
 		parser = new Parser(args[0]);
 		data = parser.parseFile();

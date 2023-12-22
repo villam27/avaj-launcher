@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public final class logger {
+public final class Logger {
 	private static Path file = Path.of("simulation.txt");
 
 	public static void create(String p_name) {
