@@ -12,10 +12,10 @@ public class Simulator {
 			System.exit(1);
 		}
 		System.out.println("Start avaj launcher");
+		logger.create("simulation.txt");
 
 		parser = new Parser(args[0]);
 		data = parser.parseFile();
-		logger.create("simulation.txt");
 		for (int i = 0; i < data.getNbrOfRestart(); i++) {
 			data.getTower().changeWeather();
 		}
