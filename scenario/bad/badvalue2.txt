@@ -1,0 +1,3 @@
+10
+Baloon B1 2 3 5
+AirPlane B2 1 -8 66
