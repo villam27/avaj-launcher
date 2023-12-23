@@ -1,13 +1,12 @@
 package com.avaj.simulator;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.avaj.coordinates.Coordinates;
 import com.avaj.exceptions.NoDataFound;
 import com.avaj.exceptions.NotAPositiveInteger;
+import com.avaj.exceptions.NotAValidHeight;
 import com.avaj.exceptions.ParsingException;
 import com.avaj.exceptions.TypeNotFoundException;
 import com.avaj.flyable.Aircraft;
@@ -28,7 +27,7 @@ public class FileReader {
 	}
 
 	public Data getData() 
-	throws NotAPositiveInteger, ParsingException, NoDataFound {
+	throws NotAPositiveInteger, ParsingException, NoDataFound, NotAValidHeight {
 		int lineCount = 1;
 		Data data = new Data();
 
@@ -41,7 +40,6 @@ public class FileReader {
 			}
 			lineCount++;
 		}
-		// exception if line <= 2
 		if (lineCount <= 2)
 			throw new NoDataFound(file.getName());
 		return data;
@@ -62,25 +60,31 @@ public class FileReader {
 	}
 
 	private Aircraft readAircraftData(String p_line, int p_lineCount)
-	throws ParsingException {
+	throws ParsingException, NotAPositiveInteger, NotAValidHeight {
 		String[] token = p_line.split(" ");
 		Aircraft aircraft = null;
+		Coordinates coordinates = null;
 
 		if (token.length != 5) {
 			throw new ParsingException(p_line, p_lineCount, file.getName());
 		}
 		try {
-			aircraft = (Aircraft)AircraftFactory.newAircraft(token[0], token[1],
-															new Coordinates(
-																Integer.parseInt(token[2]),
-																Integer.parseInt(token[3]),
-																Integer.parseInt(token[4])));
+			coordinates = new Coordinates(Integer.parseInt(token[2]),
+										Integer.parseInt(token[3]),
+										Integer.parseInt(token[4]));
+			aircraft = (Aircraft)AircraftFactory.newAircraft(token[0], token[1], coordinates);
 		} catch(TypeNotFoundException e) {
 			System.err.println(e + " in " + file.getName() + ":" + p_lineCount);
 			System.exit(1);
 		} catch(NumberFormatException e) {
 			System.err.println(e + " in " + file.getName() + ":" + p_lineCount);
 			System.exit(1);
+		}
+		if (coordinates.getLatitude() < 0 || coordinates.getLongitude() < 0) {
+			throw new NotAPositiveInteger(p_line, p_lineCount, file.getName());
+		}
+		if (coordinates.getHeight() < 0 || coordinates.getHeight() > 100) {
+			throw new NotAValidHeight(p_line, p_lineCount, file.getName());
 		}
 		return aircraft;
 	}
