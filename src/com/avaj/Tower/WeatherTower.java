@@ -24,11 +24,8 @@ public class WeatherTower extends Tower {
 			type = "Helicopter";
 		} else if (classAicraft == Baloon.class) {
 			type = "Baloon";
-		} else {
-			type = "Error";
-			// error here
 		}
-		Logger.write("Tower says: " + type + "#" + aircraft.getName()
+		Logger.writeln("Tower says: " + type + "#" + aircraft.getName()
 							+ "(" + aircraft.getId() + ") registered from weather tower.");	
 	}
 
@@ -43,11 +40,8 @@ public class WeatherTower extends Tower {
 			type = "Helicopter";
 		} else if (classAicraft == Baloon.class) {
 			type = "Baloon";
-		} else {
-			type = "Error";
-			// error here
 		}
-		Logger.write("Tower says: " + type + "#" + aircraft.getName()
+		Logger.writeln("Tower says: " + type + "#" + aircraft.getName()
 							+ "(" + aircraft.getId() + ") unregistered from weather tower.");
 	}
 }

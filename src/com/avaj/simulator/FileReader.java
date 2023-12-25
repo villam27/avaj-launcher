@@ -22,8 +22,7 @@ public class FileReader {
 			file = new File(p_file);
 			reader = new Scanner(file);
 		} catch (Exception e) {
-			System.err.println(e);
-			System.exit(1);
+			Simulator.exit(1, e);
 		}
 	}
 
@@ -70,14 +69,9 @@ public class FileReader {
 			throw new ParsingException(p_line, p_lineCount, file.getName());
 		}
 		try {
-			coordinates = new Coordinates(Integer.parseInt(token[2]),
-										Integer.parseInt(token[3]),
-										Integer.parseInt(token[4]));
+			coordinates = new Coordinates(Integer.parseInt(token[2]), Integer.parseInt(token[3]), Integer.parseInt(token[4]));
 			aircraft = (Aircraft)AircraftFactory.newAircraft(token[0], token[1], coordinates);
-		} catch(TypeNotFoundException e) {
-			System.err.println(e + " in " + file.getName() + ":" + p_lineCount);
-			System.exit(1);
-		} catch(NumberFormatException e) {
+		} catch(Exception e) {
 			System.err.println(e + " in " + file.getName() + ":" + p_lineCount);
 			System.exit(1);
 		}

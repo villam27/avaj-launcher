@@ -4,7 +4,7 @@ import com.avaj.Tower.WeatherTower;
 import com.avaj.flyable.Flyable;
 
 class Data {
-	private int nbrOfRestart = 1;
+	private int nbrOfRestart;
 	private WeatherTower tower = new WeatherTower();
 
 	public Data() {}

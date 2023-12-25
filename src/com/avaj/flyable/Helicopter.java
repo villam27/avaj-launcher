@@ -38,10 +38,10 @@ public class Helicopter extends Aircraft {
 		}
 		if (height > 100)
 			height = 100;
-		Logger.write("Helicopter#" + name + "(" + id + "): " + message);
+		Logger.writeln("Helicopter#" + name + "(" + id + "): " + message);
 		coordinates = new Coordinates(lon, lat, height);
 		if (height <= 0) {
-			Logger.write("Helicopter#" + name + "(" + id + "): landing.");
+			Logger.writeln("Helicopter#" + name + "(" + id + "): landing.");
 			weatherTower.unregister(this);
 			unregisterTower();
 		}

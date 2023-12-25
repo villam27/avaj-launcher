@@ -38,10 +38,10 @@ public class JetPlane extends Aircraft {
 		}
 		if (height > 100)
 			height = 100;
-		Logger.write("JetPlane#" + name + "(" + id + "): " + message);
+		Logger.writeln("JetPlane#" + name + "(" + id + "): " + message);
 		coordinates = new Coordinates(lon, lat, height);
 		if (height <= 0) {
-			Logger.write("JetPlane#" + name + "(" + id + "): landing.");
+			Logger.writeln("JetPlane#" + name + "(" + id + "): landing.");
 			weatherTower.unregister(this);
 			unregisterTower();
 		}
