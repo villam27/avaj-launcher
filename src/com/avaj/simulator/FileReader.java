@@ -23,6 +23,7 @@ public class FileReader {
 			reader = new Scanner(file);
 		} catch (Exception e) {
 			System.err.println(e);
+			System.exit(1);
 		}
 	}
 
