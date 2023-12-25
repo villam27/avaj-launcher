@@ -4,7 +4,7 @@ import com.avaj.logger.Logger;
 
 public class Simulator {
 	public static void main(String args[]) {
-		Parser parser;
+		FileReader parser;
 		Data data = null;
 
 		if (args.length != 1) {
@@ -14,8 +14,13 @@ public class Simulator {
 		System.out.println("Start avaj launcher");
 		Logger.create("simulation.txt");
 
-		parser = new Parser(args[0]);
-		data = parser.parseFile();
+		parser = new FileReader(args[0]);
+		try {
+			data = parser.getData();
+		} catch(Exception e) {
+			System.err.println(e);
+			System.exit(1);
+		}
 		for (int i = 0; i < data.getNbrOfRestart(); i++) {
 			data.getTower().changeWeather();
 		}
