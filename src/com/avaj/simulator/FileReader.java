@@ -4,11 +4,10 @@ import java.io.File;
 import java.util.Scanner;
 
 import com.avaj.coordinates.Coordinates;
-import com.avaj.exceptions.NoDataFound;
-import com.avaj.exceptions.NotAPositiveInteger;
-import com.avaj.exceptions.NotAValidHeight;
+import com.avaj.exceptions.NoDataFoundException;
+import com.avaj.exceptions.NotAPositiveIntegerException;
+import com.avaj.exceptions.NotAValidHeightException;
 import com.avaj.exceptions.ParsingException;
-import com.avaj.exceptions.TypeNotFoundException;
 import com.avaj.flyable.Aircraft;
 import com.avaj.flyable.AircraftFactory;
 
@@ -27,7 +26,7 @@ public class FileReader {
 	}
 
 	public Data getData() 
-	throws NotAPositiveInteger, ParsingException, NoDataFound, NotAValidHeight {
+	throws NotAPositiveIntegerException, ParsingException, NoDataFoundException, NotAValidHeightException {
 		int lineCount = 1;
 		Data data = new Data();
 
@@ -41,12 +40,12 @@ public class FileReader {
 			lineCount++;
 		}
 		if (lineCount <= 2)
-			throw new NoDataFound(file.getName());
+			throw new NoDataFoundException(file.getName());
 		return data;
 	}
 
 	private int readNbrOfRestart(String p_line)
-	throws NotAPositiveInteger {
+	throws NotAPositiveIntegerException {
 		int value = 0;
 		try {
 			value = Integer.valueOf(p_line);
@@ -55,12 +54,12 @@ public class FileReader {
 			System.exit(1);
 		}
 		if (value <= 0)
-			throw new NotAPositiveInteger(p_line, 1, file.getName());
+			throw new NotAPositiveIntegerException(p_line, 1, file.getName());
 		return value;
 	}
 
 	private Aircraft readAircraftData(String p_line, int p_lineCount)
-	throws ParsingException, NotAPositiveInteger, NotAValidHeight {
+	throws ParsingException, NotAPositiveIntegerException, NotAValidHeightException {
 		String[] token = p_line.split(" ");
 		Aircraft aircraft = null;
 		Coordinates coordinates = null;
@@ -76,10 +75,10 @@ public class FileReader {
 			System.exit(1);
 		}
 		if (coordinates.getLatitude() < 0 || coordinates.getLongitude() < 0) {
-			throw new NotAPositiveInteger(p_line, p_lineCount, file.getName());
+			throw new NotAPositiveIntegerException(p_line, p_lineCount, file.getName());
 		}
 		if (coordinates.getHeight() < 0 || coordinates.getHeight() > 100) {
-			throw new NotAValidHeight(p_line, p_lineCount, file.getName());
+			throw new NotAValidHeightException(p_line, p_lineCount, file.getName());
 		}
 		return aircraft;
 	}
